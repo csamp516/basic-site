@@ -1,2 +1,11 @@
-# basic-site
-Gulpable Basic Site
+# Basic Site
+
+## Setup
+
+`npm install`
+
+`gulp`
+
+## Building
+
+`gulp build`
