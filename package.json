@@ -1,7 +1,7 @@
 {
-  "name": "perlin",
+  "name": "basic-site",
   "version": "1.0.0",
-  "description": "Simple Perlin Noise Fun",
+  "description": "Simple Basic Site Template",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
