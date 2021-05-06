@@ -74,24 +74,14 @@ gulp.task('clean', function() {
   });
 })
 
-gulp.task('clean:dist', function() {
-  return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
+gulp.task('clean:dist', function(callback) {
+  del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
+  callback();
 });
 
 // Build Sequences
 // ---------------
 
-gulp.task('default', function(callback) {
-  runSequence(['sass', 'browserSync'], 'watch',
-    callback
-  )
-})
+gulp.task('default', gulp.series(gulp.parallel('sass', 'browserSync'), 'watch'));
 
-gulp.task('build', function(callback) {
-  runSequence(
-    'clean:dist',
-    'sass',
-    ['useref', 'images', 'fonts'],
-    callback
-  )
-})
+gulp.task('build', gulp.series('clean:dist', 'sass', gulp.parallel(['useref', 'images', 'fonts'])));
