@@ -33,9 +33,11 @@ gulp.task('sass', function() {
 
 // Watchers
 gulp.task('watch', function() {
-  gulp.watch('app/sass/**/*.scss', ['sass']);
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/js/**/*.js', browserSync.reload);
+  console.log("Meow watching");
+  gulp.watch('app/sass/**/*.scss').on('change', gulp.series('sass'));
+  gulp.watch('app/sass/**/*.scss').on('change', browserSync.reload);
+  gulp.watch('app/*.html').on('change', browserSync.reload);
+  gulp.watch('app/js/**/*.js').on('change', browserSync.reload);
 })
 
 // Optimization Tasks
@@ -82,6 +84,12 @@ gulp.task('clean:dist', function(callback) {
 // Build Sequences
 // ---------------
 
-gulp.task('default', gulp.series(gulp.parallel('sass', 'browserSync'), 'watch'));
+gulp.task('default', gulp.series(
+  gulp.parallel(
+    'sass',
+    'browserSync',
+    'watch'
+  )
+));
 
 gulp.task('build', gulp.series('clean:dist', 'sass', gulp.parallel(['useref', 'images', 'fonts'])));
