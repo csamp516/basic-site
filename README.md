@@ -4,8 +4,4 @@
 
 `yarn install`
 
-`gulp`
-
-## Building
-
-`gulp build`
+`yarn start`
